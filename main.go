@@ -10,15 +10,15 @@ import (
 )
 
 func main() {
-    // Inicializar la base de datos
+    // Inicializa la base de datos
     database := db.ConnectionDB()
     defer database.Close()
 
-    // Crear repositorios
+    // Crea los repos
     userRepo := infraRepo.NewUserRepository(database)
     orderRepo := infraRepo.NewOrderRepository(database)
 
-    // Crear casos de uso para usuarios
+    // crea los casos de uso para usuarios
     createUser := application.NewCreateUser(userRepo)
     getAllUsers := application.NewGetUser(userRepo)
     getUserByID := application.NewGetUserByID(userRepo)
@@ -26,7 +26,7 @@ func main() {
     deleteUserByID := application.NewDeleteUserByID(userRepo)
     deleteAllUsers := application.NewDeleteAllUser(userRepo)
 
-    // Crear casos de uso para órdenes
+    // crea los casos de uso para órdenes
     createOrder := application.NewCreateOrder(orderRepo)
     getAllOrders := application.NewGetAllOrders(orderRepo)
     getOrderByID := application.NewGetOrderByID(orderRepo)
@@ -34,17 +34,17 @@ func main() {
     deleteOrderByID := application.NewDeleteOrderByID(orderRepo)
     deleteAllOrders := application.NewDeleteAllOrders(orderRepo)
 
-    // Crear controladores
+    // se ccrean los controladores
     userController := controllers.NewUserController(createUser, getAllUsers, getUserByID, updateUser, deleteUserByID, deleteAllUsers)
     orderController := controllers.NewOrderController(createOrder, getAllOrders, getOrderByID, updateOrder, deleteOrderByID, deleteAllOrders)
 
-    // Inicializar Gin
+    // se inizializa Gin
     router := gin.Default()
 
-    // Configurar rutas
+    // se configuran las rutas rutas
     routes.SetupRoutes(router, userController)
     routes.SetupOrderRoutes(router, orderController)
 
-    // Iniciar servidor
+    // Se hacer inicio del servidor
     router.Run(":8080")
 }
