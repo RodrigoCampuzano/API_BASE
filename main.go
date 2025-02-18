@@ -37,8 +37,8 @@ func main() {
     deleteOrderByID := orderApp.NewDeleteOrderByID(orderRepo)
     deleteAllOrders := orderApp.NewDeleteAllOrders(orderRepo)
 
-    userController := userCtrl.NewUserController(createUser, getAllUsers, getUserByID, updateUser, deleteUserByID, deleteAllUsers)
-    orderController := oderCtrl.NewOrderController(createOrder, getAllOrders, getOrderByID, updateOrder, deleteOrderByID, deleteAllOrders)
+    userController := userCtrl.NewUserController(createUser, updateUser, deleteUserByID, deleteAllUsers, getAllUsers, getUserByID)
+    orderController := oderCtrl.NewOrderController(createOrder, updateOrder, getOrderByID, getAllOrders, deleteAllOrders, deleteOrderByID)
 
     router := gin.Default()
 
