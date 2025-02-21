@@ -57,3 +57,10 @@ func (repo *OrderRepository) DeleteByID(id int32) error {
     _, err := repo.db.Exec("DELETE FROM orders WHERE id = ?", id)
     return err
 }
+
+func (repo *OrderRepository) OrdersExistForUser(userID int32) (bool, error) {
+    var exists bool
+    query := "SELECT EXISTS(SELECT 1 FROM orders WHERE user_id = ?)"
+    err := repo.db.QueryRow(query, userID).Scan(&exists)
+    return exists, err
+}
