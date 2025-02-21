@@ -53,11 +53,6 @@ func (repo *UserRepository) Update(user *entities.User) error {
     return err
 }
 
-func (repo *UserRepository) DeleteAll() error {
-    _, err := repo.db.Exec("DELETE FROM user")
-    return err
-}
-
 func (repo *UserRepository) DeleteByID(id int32) error {
     _, err := repo.db.Exec("DELETE FROM user WHERE id = ?", id)
     return err

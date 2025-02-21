@@ -7,6 +7,5 @@ type IntrOrder interface {
     GetAll() ([]*entities.Order, error)
     GetByID(id int32) (*entities.Order, error)
     Update(order *entities.Order) error
-    DeleteAll() error
     DeleteByID(id int32) error
 }

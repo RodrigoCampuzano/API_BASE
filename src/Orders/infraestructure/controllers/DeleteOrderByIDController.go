@@ -7,14 +7,25 @@ import (
 )
 
 func (oc *OrderController) DeleteOrder(c *gin.Context) {
-    id, err := strconv.Atoi(c.Param("id"))
+    idParam := c.Param("id")
+    id, err := strconv.Atoi(idParam)
     if err != nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+        c.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
         return
     }
-    if err := oc.deleteOrderByID.Execute(int32(id)); err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+    order, err := oc.getOrderByID.Execute(int32(id))
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error al obtener la orden"})
         return
     }
-    c.JSON(http.StatusOK, gin.H{"message": "Order deleted successfully"})
+    if order == nil {
+        c.JSON(http.StatusNotFound, gin.H{"error": "Orden no encontrada"})
+        return
+    }
+    err = oc.deleteOrderByID.Execute(int32(id))
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error al eliminar la orden"})
+        return
+    }
+    c.JSON(http.StatusOK, gin.H{"message": "Orden eliminada exitosamente"})
 }

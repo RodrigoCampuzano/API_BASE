@@ -53,11 +53,6 @@ func (repo *OrderRepository) Update(order *entities.Order) error {
     return err
 }
 
-func (repo *OrderRepository) DeleteAll() error {
-    _, err := repo.db.Exec("DELETE FROM orders")
-    return err
-}
-
 func (repo *OrderRepository) DeleteByID(id int32) error {
     _, err := repo.db.Exec("DELETE FROM orders WHERE id = ?", id)
     return err

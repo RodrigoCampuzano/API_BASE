@@ -12,17 +12,15 @@ type UserRequest struct {
 type UserController struct {
 	createUser *application.CreateUser
     deleteUserByID *application.DeleteUser
-	deleteAllUsers *application.DeleteAllUser
     getAllUsers    *application.GetUsers
     getUserByID    *application.GetUserByID
     updateUser     *application.UpdateUser
 }
 
 func NewUserController( createUser *application.CreateUser, updateUser *application.UpdateUser, deleteUserByID *application.DeleteUser,
-	deleteAllUsers *application.DeleteAllUser, getAllUsers *application.GetUsers, getUserByID *application.GetUserByID,
+	getAllUsers *application.GetUsers, getUserByID *application.GetUserByID,
 	) *UserController { return &UserController{ 
 		createUser: createUser, 
-		deleteAllUsers: deleteAllUsers, 
 		updateUser: updateUser,
         deleteUserByID: deleteUserByID, 
 		getAllUsers: getAllUsers, 

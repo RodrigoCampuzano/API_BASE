@@ -12,5 +12,4 @@ func SetupOrderRoutes(router *gin.Engine, orderController *controllers.OrderCont
     router.GET("/orders/:id", orderController.GetOrderByID)
     router.PUT("/orders/:id", orderController.UpdateOrder)
     router.DELETE("/orders/:id", orderController.DeleteOrder)
-    router.DELETE("/orders", orderController.DeleteAllOrders)
 }
